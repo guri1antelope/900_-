@@ -26,6 +26,14 @@ class InterviewApp {
     this.initElements();
     this.initSpeech();
     this.initEvents();
+
+    // 音声一覧を事前にウォームアップ
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.getVoices();
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
   }
 
   initElements() {
@@ -792,8 +800,25 @@ class InterviewApp {
       .replace(/高志/g, "こうし");
   }
 
+  async getVoicesAsync() {
+    let voices = window.speechSynthesis.getVoices();
+    if (voices && voices.length > 0) return voices;
+
+    return new Promise((resolve) => {
+      let isDone = false;
+      const done = () => {
+        if (isDone) return;
+        isDone = true;
+        resolve(window.speechSynthesis.getVoices());
+      };
+
+      window.speechSynthesis.onvoiceschanged = done;
+      setTimeout(done, 250); // 最大250ms待機
+    });
+  }
+
   // --- 音声読み上げ（Chrome内蔵・落ち着いた大人の男性声） ---
-  speakText(rawText, onEndCallback = null) {
+  async speakText(rawText, onEndCallback = null) {
     const speechText = this.formatForSpeech(rawText);
     this.isSpeaking = true;
 
@@ -811,8 +836,9 @@ class InterviewApp {
     utterance.rate = 0.92;  // 落ち着いて聞き取りやすいスピード
     utterance.pitch = 0.85; // 大人の男性の落ち着いた低音トーン
 
-    const voices = window.speechSynthesis.getVoices();
-    if (voices.length > 0) {
+    // 音声一覧のロードを確実に待機（初回1問目の女声化を完全防止）
+    const voices = await this.getVoicesAsync();
+    if (voices && voices.length > 0) {
       // 1. 日本語の男性ボイスを優先探索（Ichiro, Keita, Male, 男 など）
       const maleVoice = voices.find(v => 
         (v.lang.startsWith("ja") || v.lang === "ja-JP") && 
@@ -826,7 +852,7 @@ class InterviewApp {
         utterance.voice = jaVoice;
         // 男性の個別ボイスが見当たらない場合はピッチをさらに下げて大人の男性の低音に調整
         if (!maleVoice) {
-          utterance.pitch = 0.75;
+          utterance.pitch = 0.72;
         }
       }
     }
