@@ -13,7 +13,7 @@ class InterviewApp {
     // 音声関連
     this.recognition = null;
     this.isRecognitionActive = false;
-    this.isAcceptingInput = false;    // 佑実さんの発話受付中フラグ
+    this.isAcceptingInput = false;    // Aさんの発話受付中フラグ
     this.isSpeaking = false;          // 先生の発話中フラグ
     this.ignoredPrefixLength = 0;     // 先生の発話中に拾った文字数（除外用）
     this.isManuallyEdited = false;    // 手動編集中フラグ
@@ -104,7 +104,7 @@ class InterviewApp {
           return;
         }
 
-        // 佑実さんが話した分のみを切り出して表示
+        // Aさんが話した分のみを切り出して表示
         const candidateText = full.slice(this.ignoredPrefixLength || 0);
         this.speechTranscript.value = candidateText;
         this.charCount.innerText = `${candidateText.length} 文字`;
@@ -271,12 +271,12 @@ class InterviewApp {
       div.className = "flex items-start gap-2.5 max-w-[92%] sm:max-w-[85%]" + " ml-auto flex-row-reverse";
       div.innerHTML = `
         <div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant flex items-center justify-center font-bold text-xs flex-shrink-0 shadow-xs">
-          佑
+          A
         </div>
         <div class="space-y-1 text-right">
           <div class="flex items-center justify-end gap-1.5">
             <span class="text-[10px] text-outline">${timeStr}</span>
-            <span class="text-[11px] font-bold text-secondary">佑実さん</span>
+            <span class="text-[11px] font-bold text-secondary">Aさん</span>
           </div>
           <div class="p-3 sm:p-3.5 rounded-2xl rounded-tr-none bg-secondary-container text-on-secondary-container shadow-xs border border-secondary/20 text-xs sm:text-sm leading-relaxed text-left whitespace-pre-wrap">${text.trim()}</div>
         </div>
@@ -441,7 +441,7 @@ class InterviewApp {
       }
     }
 
-    // タイムラインに佑実さんの発言を追加
+    // タイムラインにAさんの発言を追加
     this.addChatMessage("candidate", answerText || "（無回答）");
 
     // 追加質問（深掘り）の判定
@@ -665,11 +665,11 @@ class InterviewApp {
             </div>
           </div>
 
-          <!-- 2. 佑実さんの回答 -->
+          <!-- 2. Aさんの回答 -->
           <div class="flex items-start gap-2 max-w-[95%] ml-auto flex-row-reverse">
-            <div class="w-6 h-6 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant flex items-center justify-center font-bold text-[10px] flex-shrink-0 mt-0.5 shadow-xs">佑</div>
+            <div class="w-6 h-6 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant flex items-center justify-center font-bold text-[10px] flex-shrink-0 mt-0.5 shadow-xs">A</div>
             <div class="space-y-0.5 text-right">
-              <span class="text-[10px] font-bold text-secondary">佑実さんの回答</span>
+              <span class="text-[10px] font-bold text-secondary">Aさんの回答</span>
               <div class="p-2.5 rounded-xl rounded-tr-none bg-secondary-container text-on-secondary-container shadow-xs border border-secondary/20 text-xs sm:text-sm text-left">「${(item.initialAnswer || "（無回答）").trim()}」</div>
             </div>
           </div>
@@ -686,9 +686,9 @@ class InterviewApp {
               </div>
 
               <div class="flex items-start gap-2 max-w-[95%] ml-auto flex-row-reverse">
-                <div class="w-6 h-6 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant flex items-center justify-center font-bold text-[10px] flex-shrink-0 mt-0.5 shadow-xs">佑</div>
+                <div class="w-6 h-6 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant flex items-center justify-center font-bold text-[10px] flex-shrink-0 mt-0.5 shadow-xs">A</div>
                 <div class="space-y-0.5 text-right">
-                  <span class="text-[10px] font-bold text-secondary">佑実さんの追加回答</span>
+                  <span class="text-[10px] font-bold text-secondary">Aさんの追加回答</span>
                   <div class="p-2.5 rounded-xl rounded-tr-none bg-secondary-container text-on-secondary-container shadow-xs border border-secondary/20 text-xs sm:text-sm text-left">「${(item.followUpAnswer || "（無回答）").trim()}」</div>
                 </div>
               </div>
@@ -770,12 +770,12 @@ class InterviewApp {
 
   updateMicUI(active) {
     if (active) {
-      this.candidateStatus.innerText = "佑実さんの番です（マイク録音中）";
+      this.candidateStatus.innerText = "Aさんの番です（マイク録音中）";
       this.voiceVisualizer.classList.remove("opacity-20");
       this.btnMic.classList.remove("bg-primary-container");
       this.btnMic.classList.add("bg-error", "animate-pulse");
     } else {
-      this.candidateStatus.innerText = "佑実さんの番です（待機中）";
+      this.candidateStatus.innerText = "Aさんの番です（待機中）";
       this.voiceVisualizer.classList.add("opacity-20");
       this.btnMic.classList.add("bg-primary-container");
       this.btnMic.classList.remove("bg-error", "animate-pulse");
