@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ja" class="light">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>高志中等 面接トレーニング | 新潟市立高志中等教育学校 入試対策</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet"/>
+  
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  
+  <!-- Tailwind CSS v3 -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#002046",
+            "primary-container": "#1b365d",
+            "on-primary": "#ffffff",
+            "secondary": "#2c694e",
+            "secondary-container": "#aeeecb",
+            "on-secondary": "#ffffff",
+            "secondary-fixed": "#b1f0ce",
+            "on-secondary-fixed-variant": "#0e5138",
+            "tertiary": "#735c00",
+            "tertiary-container": "#cba72f",
+            "tertiary-fixed": "#ffe088",
+            "surface": "#f9f9ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f0f3ff",
+            "surface-container": "#e7eeff",
+            "surface-container-high": "#dee9ff",
+            "surface-container-highest": "#d8e3f9",
+            "on-surface": "#111c2c",
+            "on-surface-variant": "#44474e",
+            "outline": "#74777f",
+            "outline-variant": "#c4c6cf",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6"
+          },
+          fontFamily: {
+            sans: ["Noto Sans JP", "Plus Jakarta Sans", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @keyframes soundwave {
+      0%, 100% { height: 6px; }
+      50% { height: 26px; }
+    }
+    .wave-bar {
+      animation: soundwave 1.1s ease-in-out infinite;
+    }
+    .wave-bar:nth-child(2) { animation-delay: 0.15s; }
+    .wave-bar:nth-child(3) { animation-delay: 0.3s; }
+    .wave-bar:nth-child(4) { animation-delay: 0.45s; }
+    .wave-bar:nth-child(5) { animation-delay: 0.2s; }
+    .wave-bar:nth-child(6) { animation-delay: 0.35s; }
+
+    /* LINE風チャットのスムーズスクロール */
+    #chat-timeline {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+
+  <!-- ==================== 1. ホーム画面 ==================== -->
+  <div id="view-home" class="min-h-screen flex flex-col">
+    <header class="w-full bg-surface-container-lowest shadow-sm sticky top-0 z-20">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <span class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shadow-sm">
+            <span class="material-symbols-outlined text-[22px] sm:text-[24px]">explore</span>
+          </span>
+          <div>
+            <h1 class="text-sm sm:text-base font-bold text-primary leading-tight">高志中等 面接トレーニング</h1>
+            <p class="text-[10px] sm:text-xs text-on-surface-variant">新潟市立高志中等教育学校 入試対策</p>
+          </div>
+        </div>
+        <div class="text-[11px] sm:text-xs text-on-surface-variant bg-surface-container px-2.5 py-1 rounded-full font-medium">
+          佑実さん専用
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full space-y-6">
+      <div class="bg-gradient-to-br from-primary-container to-[#2d568c] text-on-primary rounded-2xl p-5 sm:p-7 shadow-md">
+        <div class="space-y-2.5">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/20 text-[11px] sm:text-xs font-semibold tracking-wider">
+            教育理念「自立と互恵」・「志の涵養」
+          </span>
+          <h2 class="text-xl sm:text-2xl font-bold leading-snug">
+            声に出して練習しよう！<br/>本番で落ち着いて話せる面接アプリ
+          </h2>
+          <p class="text-xs sm:text-sm text-surface-container-high leading-relaxed">
+            先生の質問を聞いてマイクに向かって話す練習ができます。<br/>
+            LINEのような対話形式でやり取りが残るので、振り返りもバッチリです。
+          </p>
+        </div>
+      </div>
+
+      <!-- Mode Select Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <!-- 練習モード -->
+        <div class="bg-surface-container-lowest rounded-2xl p-5 sm:p-6 shadow-sm border-2 border-secondary/30 flex flex-col justify-between hover:border-secondary transition-all">
+          <div class="space-y-2.5">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary-fixed text-on-secondary-fixed-variant flex items-center justify-center">
+              <span class="material-symbols-outlined text-[24px] sm:text-[28px]">lightbulb</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-primary">練習モード（ランダム3問）</h3>
+            <p class="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+              重要質問からバランスよく3問をランダム出題。1問ずつヒントを見ながら話せて、その場ですぐにアドバイスをもらえます。
+            </p>
+            <ul class="text-[11px] sm:text-xs text-on-surface space-y-1 pt-1">
+              <li class="flex items-center gap-1.5"><span class="text-secondary font-bold">✔</span> 優先度S・A・B/Cから各1問をバランス出題</li>
+              <li class="flex items-center gap-1.5"><span class="text-secondary font-bold">✔</span> 回答直後にワンポイントアドバイスを表示</li>
+              <li class="flex items-center gap-1.5"><span class="text-secondary font-bold">✔</span> 1回5分程度でテンポよく何度でも挑戦可能</li>
+            </ul>
+          </div>
+          <button id="btn-start-practice" class="mt-5 w-full py-3 sm:py-3.5 rounded-xl bg-secondary text-on-secondary font-bold hover:bg-opacity-95 transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 text-sm sm:text-base">
+            <span>練習モードを始める</span>
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </button>
+        </div>
+
+        <!-- 本番モード -->
+        <div class="bg-surface-container-lowest rounded-2xl p-5 sm:p-6 shadow-sm border-2 border-primary/20 flex flex-col justify-between hover:border-primary transition-all">
+          <div class="space-y-2.5">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary-container text-on-primary flex items-center justify-center">
+              <span class="material-symbols-outlined text-[24px] sm:text-[28px]">school</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-primary">本番モード（通し面接）</h3>
+            <p class="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+              本番と同じように5〜6問を通しで行います。深掘り質問にも答え、最後に全体の総合結果が出ます。
+            </p>
+            <ul class="text-[11px] sm:text-xs text-on-surface space-y-1 pt-1">
+              <li class="flex items-center gap-1.5"><span class="text-primary font-bold">✔</span> 本番同様の通し面接（10〜15分想定）</li>
+              <li class="flex items-center gap-1.5"><span class="text-primary font-bold">✔</span> 予想外の追加質問にも落ち着いて対応</li>
+              <li class="flex items-center gap-1.5"><span class="text-primary font-bold">✔</span> 最後にLINE風のトーク履歴付きで総合評価</li>
+            </ul>
+          </div>
+          <button id="btn-start-exam" class="mt-5 w-full py-3 sm:py-3.5 rounded-xl bg-primary-container text-on-primary font-bold hover:bg-opacity-95 transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 text-sm sm:text-base">
+            <span>本番モードに挑戦する</span>
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 合格への3原則 & 心構え -->
+      <div class="bg-surface-container-low rounded-2xl p-4 sm:p-6 border border-surface-container">
+        <h4 class="text-xs sm:text-sm font-bold text-primary mb-2.5 flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-tertiary text-[18px]">stars</span>
+          高志中等 合格への3原則
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-4 text-xs">
+          <div class="p-3 sm:p-4 rounded-xl bg-surface-container-lowest border border-surface-container">
+            <p class="font-bold text-primary mb-0.5">1. 結論ファースト</p>
+            <p class="text-on-surface-variant">「〜だからです」と、一番言いたいことを最初に話そう。</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-xl bg-surface-container-lowest border border-surface-container">
+            <p class="font-bold text-secondary mb-0.5">2. キーワードで話す</p>
+            <p class="text-on-surface-variant">丸暗記はNG。「努力」「工夫」など言いたい言葉を思い浮かべよう。</p>
+          </div>
+          <div class="p-3 sm:p-4 rounded-xl bg-surface-container-lowest border border-surface-container">
+            <p class="font-bold text-tertiary mb-0.5">3. 落ち着いた態度</p>
+            <p class="text-on-surface-variant">背筋を伸ばし、目を見て話そう。困ったらお助けボタンを使って大丈夫。</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ==================== 2. 面接対話画面（LINE風チャットUI） ==================== -->
+  <div id="view-interview" class="hidden min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="w-full bg-surface-container-lowest shadow-sm sticky top-0 z-30">
+      <div class="max-w-6xl mx-auto px-3 sm:px-6 flex justify-between items-center h-14 sm:h-16">
+        <!-- Logo & Mode -->
+        <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+          <span class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shadow-sm flex-shrink-0">
+            <span class="material-symbols-outlined text-[18px] sm:text-[20px]">explore</span>
+          </span>
+          <div id="mode-badge" class="flex items-center gap-1 px-2.5 py-0.5 sm:px-3 sm:py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-[11px] sm:text-xs font-medium border border-secondary/20 truncate">
+            <span class="w-2 h-2 rounded-full bg-secondary animate-pulse flex-shrink-0"></span>
+            <span class="truncate">練習モード</span>
+          </div>
+        </div>
+
+        <!-- Question Counter & Timer -->
+        <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+          <div class="flex flex-col items-center">
+            <div id="question-counter" class="flex items-center gap-1 text-[11px] sm:text-xs">
+              <span class="text-primary font-bold">第 1 問</span>
+              <span class="text-on-surface-variant">/ 3問</span>
+            </div>
+            <div class="w-16 sm:w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden mt-0.5">
+              <div id="progress-bar" class="h-full bg-secondary rounded-full transition-all duration-300" style="width: 33%"></div>
+            </div>
+          </div>
+          <!-- Timer Pill -->
+          <div class="flex items-center gap-1 px-2.5 py-1 bg-surface-container rounded-full text-on-surface">
+            <span class="material-symbols-outlined text-tertiary text-[16px]">timer</span>
+            <span id="timer-display" class="font-bold text-primary tracking-wider text-xs sm:text-sm">00:00</span>
+          </div>
+          <!-- Exit Action -->
+          <button id="btn-exit-interview" class="p-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-surface-container-highest text-error hover:bg-error-container hover:text-on-error-container transition-colors active:scale-95 flex items-center gap-1" title="面接を終了">
+            <span class="material-symbols-outlined text-[18px]">logout</span>
+            <span class="hidden sm:inline text-xs font-semibold">終了</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Stage -->
+    <main class="flex-1 w-full max-w-6xl mx-auto px-3 sm:px-6 py-4 flex flex-col gap-3">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start flex-1">
+        
+        <!-- LEFT COLUMN: LINE風チャット対話 + 入力ドック -->
+        <section class="lg:col-span-8 flex flex-col gap-3">
+          
+          <!-- 面接ステータスバー -->
+          <div class="flex items-center justify-between px-3 py-2 bg-surface-container-lowest rounded-xl border border-surface-container text-xs">
+            <div class="flex items-center gap-2">
+              <span id="interviewer-category" class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-bold text-[10px] sm:text-xs">
+                志望動機（優先度 S）
+              </span>
+              <span id="interviewer-status" class="text-secondary font-medium flex items-center gap-1">
+                <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                <span>先生が質問しています…</span>
+              </span>
+            </div>
+            <button id="btn-replay" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container-low text-primary hover:bg-surface-container transition-colors text-[11px] font-semibold">
+              <span class="material-symbols-outlined text-[14px] text-secondary">volume_up</span>
+              <span>もう一度聞く</span>
+            </button>
+          </div>
+
+          <!-- LINE風 チャットタイムライン（過去の会話がずっと残る！） -->
+          <div id="chat-timeline" class="bg-surface-container-low rounded-2xl p-4 sm:p-5 flex flex-col gap-3.5 overflow-y-auto max-h-[42vh] sm:max-h-[46vh] min-h-[220px] shadow-inner border border-surface-variant/40">
+            <!-- JSで動的に吹き出しが積み重なる -->
+          </div>
+
+          <!-- 回答入力ドック（音声文字起こし + 直接入力 + 操作ボタン） -->
+          <article class="bg-surface-container-lowest rounded-2xl p-3 sm:p-4 shadow-sm border border-surface-container flex flex-col gap-2.5">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed-variant font-bold text-xs">
+                  佑
+                </div>
+                <span id="candidate-status" class="text-xs sm:text-sm font-bold text-on-surface">佑実さんの回答入力</span>
+              </div>
+              
+              <!-- Voice Visualizer -->
+              <div id="voice-visualizer" class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-secondary-fixed/50 text-on-secondary-fixed-variant border border-secondary/20 transition-opacity duration-200 opacity-20">
+                <div class="flex items-center gap-0.5 h-3.5 px-0.5">
+                  <span class="w-1 bg-secondary rounded-full wave-bar"></span>
+                  <span class="w-1 bg-secondary rounded-full wave-bar"></span>
+                  <span class="w-1 bg-secondary rounded-full wave-bar"></span>
+                  <span class="w-1 bg-secondary rounded-full wave-bar"></span>
+                </div>
+                <span class="text-[10px] font-bold text-secondary">音声認識中</span>
+              </div>
+            </div>
+
+            <!-- 入力テキストエリア（直接キーボード入力可能） -->
+            <div class="relative">
+              <textarea id="speech-transcript" class="w-full bg-surface-container-low border border-surface-variant/70 focus:border-primary/50 focus:bg-white focus:ring-2 focus:ring-primary/20 rounded-xl p-3 text-sm sm:text-base text-on-surface leading-relaxed resize-y outline-none min-h-[90px] sm:min-h-[110px]" placeholder="マイクに向かって話すか、直接文字を入力・修正できます…"></textarea>
+              <div class="absolute bottom-2.5 right-3 flex items-center gap-2 pointer-events-none">
+                <span id="edit-badge" class="hidden px-1.5 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold">手動編集中</span>
+                <span id="char-count" class="text-[11px] text-outline font-semibold">0 文字</span>
+              </div>
+            </div>
+
+            <!-- アクション操作ボタン -->
+            <div class="flex items-center justify-between gap-2.5 pt-0.5">
+              <button id="btn-mic" class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow-md hover:opacity-90 active:scale-95 transition-all flex-shrink-0" title="マイクON/OFF">
+                <span class="material-symbols-outlined text-[22px] sm:text-[24px]">mic</span>
+              </button>
+              <button id="btn-submit" class="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-primary-container to-secondary text-on-primary font-bold hover:opacity-95 transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 text-sm sm:text-base">
+                <span>この内容で回答を送信する</span>
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- レスキューボタン（セーフティネット） -->
+          <article class="bg-surface-container-low rounded-xl p-2.5 sm:p-3 border border-surface-container">
+            <div class="flex items-center gap-1.5 mb-1.5">
+              <span class="material-symbols-outlined text-tertiary text-[16px]">lightbulb</span>
+              <h3 class="text-[11px] sm:text-xs font-bold text-primary">困ったら落ち着いて押そう</h3>
+              <span class="text-[10px] text-on-surface-variant ml-auto">（使っても減点なし）</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
+              <button id="btn-rescue-repeat" class="px-2.5 py-1.5 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-left border border-outline-variant/60 shadow-sm transition-all hover:border-primary active:scale-95 flex items-center gap-2">
+                <span class="text-sm flex-shrink-0">🗣️</span>
+                <p class="text-[11px] font-semibold text-primary truncate">もう一度質問をお願いします</p>
+              </button>
+              <button id="btn-rescue-think" class="px-2.5 py-1.5 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-left border border-outline-variant/60 shadow-sm transition-all hover:border-secondary active:scale-95 flex items-center gap-2">
+                <span class="text-sm flex-shrink-0">⏱️</span>
+                <p class="text-[11px] font-semibold text-secondary truncate">少し考える時間をください</p>
+              </button>
+              <button id="btn-rescue-restart" class="px-2.5 py-1.5 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-left border border-outline-variant/60 shadow-sm transition-all hover:border-tertiary active:scale-95 flex items-center gap-2">
+                <span class="text-sm flex-shrink-0">🔄</span>
+                <p class="text-[11px] font-semibold text-tertiary truncate">最初からやり直してもいいですか</p>
+              </button>
+            </div>
+          </article>
+        </section>
+
+        <!-- RIGHT SIDEBAR (練習モード限定ヒント) -->
+        <aside id="practice-sidebar" class="lg:col-span-4 flex flex-col gap-3">
+          <div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-surface-container">
+            <div class="flex items-center gap-1.5 mb-1.5 pb-1.5 border-b border-surface-container-low">
+              <span class="material-symbols-outlined text-secondary text-[18px]">psychology</span>
+              <h3 class="text-xs sm:text-sm font-bold text-primary">この質問の狙い</h3>
+            </div>
+            <p id="intent-text" class="text-xs text-on-surface leading-relaxed">
+              学校の特色（6年一貫、探究学習、落ち着いた校風）を正しく理解し、「なぜ地域の公立中学校ではなく高志なのか」という強い志望意志を見ます。
+            </p>
+          </div>
+
+          <div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-surface-container">
+            <div class="flex items-center gap-1.5 mb-1.5 pb-1.5 border-b border-surface-container-low">
+              <span class="material-symbols-outlined text-tertiary text-[18px]">checklist</span>
+              <h3 class="text-xs sm:text-sm font-bold text-primary">おすすめの回答の流れ</h3>
+            </div>
+            <ul id="structure-checklist" class="space-y-1.5 text-xs">
+              <!-- JSで動的生成 -->
+            </ul>
+          </div>
+
+          <details class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-surface-container">
+            <summary class="text-xs font-bold text-primary cursor-pointer hover:text-secondary flex items-center justify-between">
+              <span>💡 お手本回答を見る</span>
+              <span class="material-symbols-outlined text-[18px]">expand_more</span>
+            </summary>
+            <p id="example-text" class="mt-2.5 text-xs text-on-surface-variant leading-relaxed bg-surface-container-low p-2.5 rounded-lg">
+              お手本テキスト
+            </p>
+          </details>
+        </aside>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ==================== 3. 結果・総合評価画面（トーク履歴全見返し） ==================== -->
+  <div id="view-result" class="hidden min-h-screen flex flex-col">
+    <header class="w-full bg-surface-container-lowest shadow-sm sticky top-0 z-20">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-xl bg-primary-container text-on-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-[18px]">workspace_premium</span>
+          </span>
+          <h2 class="font-bold text-primary text-sm sm:text-base">面接結果・振り返りシート</h2>
+        </div>
+        <button id="btn-result-home" class="px-3 py-1 rounded-lg bg-surface-container text-primary text-xs font-bold hover:bg-surface-container-high transition-colors">
+          ホームへ戻る
+        </button>
+      </div>
+    </header>
+
+    <main class="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full space-y-6">
+      <div id="result-summary">
+        <!-- JSでサマリー挿入 -->
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="text-base sm:text-lg font-bold text-primary flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-secondary">forum</span>
+          面接トーク履歴とフィードバック
+        </h3>
+        <div id="result-list" class="space-y-4">
+          <!-- JSで各設問の結果とチャット履歴挿入 -->
+        </div>
+      </div>
+
+      <div class="pt-4 flex justify-center">
+        <button id="btn-result-retry" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-primary-container text-on-primary font-bold shadow-md hover:opacity-95 transition-all text-sm sm:text-base">
+          もう一度練習する
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- ==================== 4. 練習モード 即時フィードバックモーダル ==================== -->
+  <div id="feedback-modal" class="hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-surface-container-lowest rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-200">
+      <div class="flex items-center justify-between border-b border-surface-container-low pb-2.5">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant flex items-center justify-center">
+            <span class="material-symbols-outlined text-[16px]">verified</span>
+          </span>
+          <h3 class="font-bold text-primary text-sm sm:text-base">ワンポイントアドバイス</h3>
+        </div>
+      </div>
+
+      <div id="modal-feedback-content">
+        <!-- JSで生成 -->
+      </div>
+
+      <button id="btn-modal-next" class="w-full py-3 rounded-xl bg-secondary text-on-secondary font-bold hover:bg-opacity-95 transition-all shadow-md text-sm sm:text-base">
+        次の質問へ進む
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
