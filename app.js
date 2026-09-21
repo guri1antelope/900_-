@@ -303,7 +303,7 @@ class InterviewApp {
   }
 
   // --- 練習モード開始（優先度を考慮したランダム3問） ---
-  startPracticeMode(selectedQId = null) {
+  async startPracticeMode(selectedQId = null) {
     this.currentMode = "practice";
     if (selectedQId) {
       this.questionList = INTERVIEW_QUESTIONS.filter(q => q.id === selectedQId);
@@ -320,11 +320,12 @@ class InterviewApp {
     this.addSystemDivider("練習モードを開始しました（全3問）");
     this.setupInterviewScreen();
     this.ensureRecognitionActive();
+    await this.getVoicesAsync();
     this.loadQuestion();
   }
 
   // --- 本番モード開始 ---
-  startExamMode() {
+  async startExamMode() {
     this.currentMode = "exam";
     const sList = this.shuffle([...INTERVIEW_QUESTIONS.filter(q => q.priority === "S")]).slice(0, 3);
     const aList = this.shuffle([...INTERVIEW_QUESTIONS.filter(q => q.priority === "A")]).slice(0, 2);
@@ -337,6 +338,7 @@ class InterviewApp {
     this.addSystemDivider(`本番モードを開始しました（全${this.questionList.length}問）`);
     this.setupInterviewScreen();
     this.ensureRecognitionActive();
+    await this.getVoicesAsync();
     this.loadQuestion();
   }
 
@@ -805,19 +807,33 @@ class InterviewApp {
     if (voices && voices.length > 0) return voices;
 
     return new Promise((resolve) => {
-      let isDone = false;
-      const done = () => {
-        if (isDone) return;
-        isDone = true;
-        resolve(window.speechSynthesis.getVoices());
+      let resolved = false;
+      const checkDone = () => {
+        if (resolved) return;
+        const currentVoices = window.speechSynthesis.getVoices();
+        if (currentVoices && currentVoices.length > 0) {
+          resolved = true;
+          clearInterval(pollInterval);
+          clearTimeout(timeoutId);
+          resolve(currentVoices);
+        }
       };
 
-      window.speechSynthesis.onvoiceschanged = done;
-      setTimeout(done, 250); // 最大250ms待機
+      window.speechSynthesis.onvoiceschanged = checkDone;
+      const pollInterval = setInterval(checkDone, 50);
+
+      // 最大1000ms待機
+      const timeoutId = setTimeout(() => {
+        if (!resolved) {
+          resolved = true;
+          clearInterval(pollInterval);
+          resolve(window.speechSynthesis.getVoices());
+        }
+      }, 1000);
     });
   }
 
-  // --- 音声読み上げ（Chrome内蔵・落ち着いた大人の男性声） ---
+  // --- 音声読み上げ（落ち着いた大人の男性声） ---
   async speakText(rawText, onEndCallback = null) {
     const speechText = this.formatForSpeech(rawText);
     this.isSpeaking = true;
@@ -831,18 +847,21 @@ class InterviewApp {
     // 既存の音声を即座に停止
     window.speechSynthesis.cancel();
 
-    const utterance = new SpeechSynthesisUtterance(speechText);
-    utterance.lang = "ja-JP";
-    utterance.rate = 0.92;  // 落ち着いて聞き取りやすいスピード
-    utterance.pitch = 0.85; // 大人の男性の落ち着いた低音トーン
-
     // 音声一覧のロードを確実に待機（初回1問目の女声化を完全防止）
     const voices = await this.getVoicesAsync();
+
+    // 音声リスト取得後に Utterance を生成（事前生成によるデフォルト音声固定化を防止）
+    const utterance = new SpeechSynthesisUtterance(speechText);
+    utterance.lang = "ja-JP";
+    utterance.rate = 0.92; // 落ち着いて聞き取りやすいスピード
+
+    let selectedPitch = 0.72; // 基本は落ち着いた低音トーン
+
     if (voices && voices.length > 0) {
-      // 1. 日本語の男性ボイスを優先探索（Ichiro, Keita, Male, 男 など）
+      // 1. 日本語の男性ボイスを優先探索（Ichiro, Keita, Kenji, Daichi, Takumi, Otoya, Hattori, Male, 男 など）
       const maleVoice = voices.find(v => 
         (v.lang.startsWith("ja") || v.lang === "ja-JP") && 
-        (v.name.includes("Ichiro") || v.name.includes("Keita") || v.name.includes("Kenji") || v.name.includes("Daichi") || v.name.includes("Male") || v.name.includes("男"))
+        (v.name.includes("Ichiro") || v.name.includes("Keita") || v.name.includes("Kenji") || v.name.includes("Daichi") || v.name.includes("Takumi") || v.name.includes("Otoya") || v.name.includes("Hattori") || v.name.includes("Male") || v.name.includes("男"))
       );
 
       // 2. 日本語ボイスのフォールバック
@@ -850,12 +869,15 @@ class InterviewApp {
 
       if (jaVoice) {
         utterance.voice = jaVoice;
-        // 男性の個別ボイスが見当たらない場合はピッチをさらに下げて大人の男性の低音に調整
-        if (!maleVoice) {
-          utterance.pitch = 0.72;
+        if (maleVoice) {
+          selectedPitch = 0.85; // 男性の地声がある場合は自然なトーン
+        } else {
+          selectedPitch = 0.70; // 女性ボイス等の場合はピッチを下げて落ち着いた中低音に
         }
       }
     }
+
+    utterance.pitch = selectedPitch;
 
     let hasEnded = false;
     const finish = () => {
